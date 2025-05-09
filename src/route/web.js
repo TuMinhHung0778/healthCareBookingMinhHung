@@ -4,9 +4,14 @@ import homeController from "../controllers/homeController";
 let router = express.Router();
 
 let initWebRoues = (app) => {
+    // rest api
+    // đối với rest api khi muốn lấy dứ liệu ==> dùng method get
     router.get('/', homeController.getHomePage);
     router.get('/about', homeController.getAboutPage);
-    // rest api 
+    router.get('/crud', homeController.getCRUD);
+
+    router.post('/post-crud', homeController.postCRUD);
+
     return app.use("/", router);
 }
 

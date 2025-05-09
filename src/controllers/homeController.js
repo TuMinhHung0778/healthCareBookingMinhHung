@@ -1,5 +1,5 @@
 import db from '../models/index'
-
+import CRUDservice from '../services/CRUDservice';
 let getHomePage = async (req, res) => {
     try {
         let data = await db.User.findAll(); // lấy toàn bộ danh sách user từ database 
@@ -18,12 +18,19 @@ let getAboutPage = (req, res) => {
     // Render trang about.ejs mà không cần database.
 }
 
-// object: {
-//     key: '',
-//     value: ''
-// }
+let getCRUD = (req, res) => {
+    return res.render('crud.ejs');
+}
+
+let postCRUD = async (req, res) => {
+    let message = await CRUDservice.createNewUser(req.body);
+    console.log(message);
+    return res.send('post crud from server');
+}
 module.exports = {
     getHomePage: getHomePage,
-    getAboutPage: getAboutPage
+    getAboutPage: getAboutPage,
+    getCRUD: getCRUD,
+    postCRUD: postCRUD,
     // Xuất module => Cho phép sử dụng hàm ở file khác.
 }
